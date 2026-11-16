@@ -1,0 +1,219 @@
+/* ==========================================================
+   RESET BÁSICO
+   Remove margens padrão do navegador e faz o tamanho dos
+   elementos incluir padding e borda (mais fácil de calcular)
+   ========================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ==========================================================
+   VARIÁVEIS DE COR
+   Definimos as cores uma vez só e reutilizamos com var(--nome)
+   Se quiser mudar o tema, basta alterar aqui.
+   ========================================================== */
+:root {
+  --fundo: #0f1117;
+  --card: #1a1d27;
+  --item: #232736;
+  --borda: #2f3447;
+  --texto: #e8eaf0;
+  --texto-suave: #8a90a6;
+  --destaque: #7c5cff;
+  --destaque-hover: #6944ff;
+  --perigo: #ff5c7a;
+  --sucesso: #3ddc97;
+}
+
+/* ==========================================================
+   CORPO DA PÁGINA
+   Flexbox para centralizar o card na tela
+   ========================================================== */
+body {
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  background-color: var(--fundo);
+  color: var(--texto);
+  min-height: 100vh;           /* ocupa pelo menos a altura da tela */
+  display: flex;
+  justify-content: center;     /* centraliza na horizontal */
+  align-items: flex-start;     /* alinha no topo */
+  padding: 40px 16px;
+}
+
+/* ==========================================================
+   CARD PRINCIPAL
+   ========================================================== */
+.card {
+  background-color: var(--card);
+  width: 100%;
+  max-width: 480px;            /* em telas grandes, não passa de 480px */
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid var(--borda);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.contador {
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+/* ==========================================================
+   FORMULÁRIO (input + botão lado a lado)
+   ========================================================== */
+.form {
+  display: flex;
+  gap: 10px;
+}
+
+.form input {
+  flex: 1;                     /* o input ocupa todo o espaço sobrando */
+  padding: 14px 18px;
+  background-color: var(--item);
+  border: 2px solid var(--borda);
+  border-radius: 999px;        /* bordas totalmente arredondadas */
+  color: var(--texto);
+  font-size: 1rem;
+  outline: none;               /* remove o contorno padrão ao focar */
+  transition: border-color 0.2s;
+}
+
+.form input::placeholder {
+  color: var(--texto-suave);
+}
+
+.form input:focus {
+  border-color: var(--destaque);
+}
+
+.btn-adicionar {
+  padding: 14px 24px;
+  background-color: var(--destaque);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.btn-adicionar:hover {
+  background-color: var(--destaque-hover);
+}
+
+.btn-adicionar:active {
+  transform: scale(0.96);      /* efeito de "apertar" o botão */
+}
+
+/* ==========================================================
+   MENSAGEM DE ERRO
+   ========================================================== */
+.erro {
+  color: var(--perigo);
+  font-size: 0.85rem;
+  margin: 8px 0 0 18px;
+  min-height: 1.2em;           /* reserva espaço para o layout não "pular" */
+}
+
+/* ==========================================================
+   LISTA DE TAREFAS
+   ========================================================== */
+.lista {
+  list-style: none;            /* remove as bolinhas da lista */
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tarefa {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--item);
+  padding: 14px 16px;
+  border-radius: 14px;
+  border-left: 4px solid var(--destaque);   /* faixa colorida = pendente */
+  transition: opacity 0.2s, border-color 0.2s;
+}
+
+.tarefa input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--sucesso); /* cor do checkbox marcado */
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.tarefa-texto {
+  flex: 1;
+  word-break: break-word;      /* quebra textos muito longos */
+}
+
+/* ----- Estado: tarefa concluída ----- */
+.tarefa.concluida {
+  border-left-color: var(--sucesso);        /* faixa verde = concluída */
+  opacity: 0.6;
+}
+
+.tarefa.concluida .tarefa-texto {
+  text-decoration: line-through;            /* texto riscado */
+  color: var(--texto-suave);
+}
+
+/* ----- Botão de excluir (discreto) ----- */
+.btn-excluir {
+  background: none;
+  border: none;
+  color: var(--texto-suave);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.btn-excluir:hover {
+  color: var(--perigo);
+  background-color: rgba(255, 92, 122, 0.12);
+}
+
+/* ==========================================================
+   MENSAGEM DE LISTA VAZIA
+   ========================================================== */
+.vazia {
+  text-align: center;
+  color: var(--texto-suave);
+  padding: 24px 0 8px;
+}
+
+/* ==========================================================
+   RESPONSIVIDADE
+   Regras que valem apenas para telas de até 480px (celulares)
+   ========================================================== */
+@media (max-width: 480px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .form {
+    flex-direction: column;    /* input em cima, botão embaixo */
+  }
+
+  .btn-adicionar {
+    width: 100%;
+  }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Define a codificação de caracteres (permite acentos como ç, ã, é) -->
+  <meta charset="UTF-8">
+
+  <!-- Faz a página se ajustar corretamente em telas de celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Lista de Tarefas</title>
+  <link rel="icon" href="data:,">
+  <!-- Conecta o arquivo de estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Card central que contém toda a aplicação -->
+  <main class="card">
+
+    <h1>Minhas Tarefas</h1>
+
+    <!-- Mostra quantas tarefas ainda estão pendentes (preenchido pelo JS) -->
+    <p class="contador" id="contador">0 tarefas pendentes</p>
+
+    <!-- Formulário: permite adicionar tarefa clicando no botão OU apertando Enter -->
+    <form id="form-tarefa" class="form">
+      <input
+        type="text"
+        id="input-tarefa"
+        placeholder="O que você precisa fazer?"
+        autocomplete="off"
+        maxlength="100"
+      >
+      <button type="submit" class="btn-adicionar">Adicionar</button>
+    </form>
+
+    <!-- Mensagem de erro (aparece quando a tarefa é vazia) -->
+    <p class="erro" id="mensagem-erro"></p>
+
+    <!-- Lista onde as tarefas serão inseridas pelo JavaScript -->
+    <ul class="lista" id="lista-tarefas"></ul>
+
+    <!-- Mensagem exibida quando não há nenhuma tarefa -->
+    <p class="vazia" id="mensagem-vazia">Nenhuma tarefa por aqui. Adicione a primeira!</p>
+
+  </main>
+
+  <!-- O script fica no final para que o HTML já exista quando o JS rodar -->
+  <script src="script.js"></script>
+</body>
+</html>
